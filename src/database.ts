@@ -1,6 +1,6 @@
 import * as config from './config.json'
 
-export const userTable = {
+export const mysqlDb = {
     client: 'mysql',
     connection: {
         host: config.mysql.host,

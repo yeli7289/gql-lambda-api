@@ -1,23 +1,12 @@
-import { userTable } from './knex';
-import Knex from "knex";
-import { User } from './integration/User';
+import { getUserWithId, verifyAccount } from "./user/userService";
 
-const db = Knex(userTable);
-console.log("connection establish for userTable: " + userTable);
-export const resolvers = {
+export const resolvers: any = {
     Query: {
-      getUserInfo: (root, args) => 
-      (
-        db('user').where('user_id', args.id).then(users => {
-          console.log(args.id);
-          const user = users[0];
-          console.log(users.toString);
-          console.log(user);
-          if (!user) {
-            throw new Error('user not found!');
-          }
-          return user;
-        })
-      )
+      async getUserInfo(_: any, args: { id: string }) {
+        return await getUserWithId(args.id);
+      },
+      async verifyAccount(_: any, args: { account: string, password: string }) {
+        return await verifyAccount(args.account, args.password);
+      }
     }
 };
