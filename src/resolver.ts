@@ -1,4 +1,4 @@
-import { getPoll, getPolls } from "./poll/pollService";
+import { getPolls } from "./poll/pollService";
 import { getUserWithId, verifyAccount } from "./user/userService";
 
 export const resolvers: any = {
@@ -16,7 +16,8 @@ export const resolvers: any = {
       },
 
       async getPoll(_:any, args: { id: string }) {
-        return await getPoll(args.id);
+        let polls = await getPolls([args.id]);
+        return polls[0];
       }
     }
 };

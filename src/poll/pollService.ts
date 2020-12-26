@@ -37,7 +37,3 @@ export async function getPolls(poll_ids: string[]): Promise<Poll[]> {
         })
     });
 }
-
-export async function getPoll(poll_id: string): Promise<Poll> {
-    return getPolls([ poll_id ])[0];
-}
